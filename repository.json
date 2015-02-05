@@ -54,6 +54,20 @@
           "downloadUrl": "http://testingbot.com/testingbot-builder.zip"
         }
       }
+    },
+    {
+      "identifier": "crossbrowsertesting",
+      "name": "CrossBrowserTesting.com for Selenium Builder",
+      "description": "Enables export and playback on CrossBrowserTesting.com.",
+      "siteUrl": "http://crossbrowsertesting.com/faq/how-do-i-record-and-run-selenium-tests-selenium-builder",
+      "browsers": {
+        "firefox": {
+          "pluginVersion": "1.5",
+          "builderMinVersion": "2.3",
+          "builderMaxVersion": "2.3.*",
+          "downloadUrl": "http://crossbrowsertesting.com/crossbrowsertesting-builder.zip"
+        }
+      }
     }
   ]
 }
