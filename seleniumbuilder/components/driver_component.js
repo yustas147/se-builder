@@ -6461,6 +6461,7 @@ FirefoxDriver.prototype.close = function(a) {
 };
 function injectAndExecuteScript(a, b, c, d) {
   var e = a.session.getDocument(), f = b.script, g = Utils.unwrapParameters(b.args, e);
+  g = JSON.stringify(g); // Stringify parameters.
   var unwrappedDoc = fxdriver.moz.unwrap(e);
   if(e.designMode && "on" == e.designMode.toLowerCase()) {
     if(c) {
@@ -6494,7 +6495,7 @@ function injectAndExecuteScript(a, b, c, d) {
     var b = function() {
       e.removeEventListener("webdriver-evaluate-response", b, !0);
       if(!n.modalOpen) {
-        var c = unwrappedDoc['__webdriver_evaluate']['result'];
+        var c = JSON.parse(unwrappedDoc['__webdriver_evaluate']['result']);
         a.value = Utils.wrapResult(c, e);
         a.status = unwrappedDoc['__webdriver_evaluate']['code'];
         delete unwrappedDoc['__webdriver_evaluate']['result'];
