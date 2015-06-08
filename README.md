@@ -1,12 +1,8 @@
-# Selenium Builder [![Build Status](https://secure.travis-ci.org/sebuilder/se-builder.png)](http://travis-ci.org/sebuilder/se-builder)
-
-[![Selenium Test Status](https://saucelabs.com/browser-matrix/sebuilder.svg)](https://saucelabs.com/u/sebuilder)
-
 A test development environment for Selenium 1 and 2
+that can record use cases in odoo.com (currently only V7.0)
 
 ## Install
 
-  * An XPI for the latest release version is available from http://www.saucelabs.com/addons/selenium-builder-latest.xpi
   * Instructions for installing the development version - https://github.com/sebuilder/se-builder/wiki/Contribution-Notes
 
 ## Resources
@@ -33,5 +29,6 @@ A test development environment for Selenium 1 and 2
   * Jonathan Lipps ([jlipps](https://github.com/jlipps))
   * Jérôme Kowalczyk ([jkowalczyk](https://github.com/jkowalczyk))
   * Nick Schonning ([nschonni](https://github.com/nschonni))
+  * Andreas Stauder ([BT-astauder](https://github.com/BT-astauder))
 
 ## Thanks!

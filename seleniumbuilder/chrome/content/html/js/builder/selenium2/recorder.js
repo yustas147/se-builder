@@ -216,10 +216,15 @@ builder.selenium2.Recorder.prototype = {
     
     // Selecting
     if (e.target.type.toLowerCase() == 'select' || e.target.type.toLowerCase() == 'select-one') {
-      var vals = {};
-      vals[builder.locator.methods.xpath] = [locator.getValueForMethod(builder.locator.methods.xpath) + "//option[" + (e.target.selectedIndex + 1) + "]"];
-      var optLoc = new builder.locator.Locator(builder.locator.methods.xpath, 0, vals);
-      
+
+      if(locator.preferredMethod == builder.locator.methods.openerp70){
+	var optLoc = locator;
+      } else {
+	var vals = {};
+        vals[builder.locator.methods.xpath] = [locator.getValueForMethod(builder.locator.methods.xpath) + "//option[" + (e.target.selectedIndex + 1) + "]"];
+        var optLoc = new builder.locator.Locator(builder.locator.methods.xpath, 0, vals);
+      }
+
       // Add select
       this.recordStep(new builder.Step(builder.selenium2.stepTypes.setElementSelected, optLoc));
       return;
