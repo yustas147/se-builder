@@ -18,7 +18,7 @@ limitations under the License.
 (function() {
   var handleEvaluateEvent = function(event) {
     var script = document.__webdriver_evaluate['script'];
-    var args = document.__webdriver_evaluate['args'];
+    var args = JSON.parse(document.__webdriver_evaluate['args']);
     var isAsync = document.__webdriver_evaluate['async'];
     var timeout = document.__webdriver_evaluate['timeout'];
     var timeoutId;
@@ -35,7 +35,7 @@ limitations under the License.
       document.__webdriver_evaluate['timeout'] = null;
 
       // Respond
-      document.__webdriver_evaluate['result'] = value;
+      document.__webdriver_evaluate['result'] = JSON.stringify(value);
       document.__webdriver_evaluate['code'] = status;
 
       var response = document.createEvent('Events');
