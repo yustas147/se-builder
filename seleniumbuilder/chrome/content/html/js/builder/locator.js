@@ -227,18 +227,46 @@ function inWindow(element){
 }
 
 function openerp70(values, element){
-				
-	// MainMenu
+
+	// MainMenu 8.0 click in A-tag
+    if(jQuery(element).parents('#oe_main_menu_placeholder').length && jQuery(element).hasClass('oe_menu_toggler')){
+		value = jQuery.trim(jQuery(element).attr('data-menu'));
+		values[builder.locator.methods.openerp70] = ["MainMenu    " + value];
+		return builder.locator.methods.openerp70;
+	}
+
+	// MainMenu 8.0 click in SPAN-tag
+    if(jQuery(element).parents('#oe_main_menu_placeholder').length && jQuery(element).hasClass('oe_menu_text')){
+		value = jQuery.trim(jQuery(element).parent().attr('data-menu'));
+		values[builder.locator.methods.openerp70] = ["MainMenu    " + value];
+		return builder.locator.methods.openerp70;
+	}
+
+	// MainMenu 7.0
 	if(jQuery(element).parents('.oe_menu').length){
 		value = jQuery.trim(jQuery(element).parent().attr('data-menu'));
 		values[builder.locator.methods.openerp70] = ["MainMenu    " + value];
 		return builder.locator.methods.openerp70;
 	}
-	
-	// SubMenu
-	if(jQuery(element).hasClass('oe_menu_text')){
+
+	// SubMenu 8.0 click in A-tag
+    if(jQuery(element).parents('div.oe_secondary_menus_container').length && jQuery(element).hasClass('oe_menu_leaf')){
+		value = jQuery.trim(jQuery(element).attr('data-menu'));
+		values[builder.locator.methods.openerp70] = ["SubMenu    " + value];
+		return builder.locator.methods.openerp70;
+	}
+
+	// SubMenu 8.0 click in SPAN-tag
+    if(jQuery(element).parents('div.oe_secondary_menus_container').length && jQuery(element).hasClass('oe_menu_text')){
 		value = jQuery.trim(jQuery(element).parent().attr('data-menu'));
 		values[builder.locator.methods.openerp70] = ["SubMenu    " + value];
+		return builder.locator.methods.openerp70;
+	}
+
+	// SubMenu 7.0
+	if(jQuery(element).hasClass('oe_menu_text')){
+		value = jQuery.trim(jQuery(element).parent().attr('data-menu'));
+		values[builder.locator.methods.openerp70] = ["SubMenu2    " + value];
 		return builder.locator.methods.openerp70;
 	}
 
