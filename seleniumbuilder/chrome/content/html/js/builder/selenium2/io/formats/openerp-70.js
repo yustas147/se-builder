@@ -29,7 +29,7 @@ builder.selenium2.io.addLangFormatter({
     "sendKeysToElement":
     	"\t{locator}\t{text}\n",
     "setElementSelected":
-    	"\t{locator}\t{text}\n",
+    	"\t{locator}\n",
     "setElementNotSelected":
     	"\t{locator}\t{text}\n",
     "submitElement":

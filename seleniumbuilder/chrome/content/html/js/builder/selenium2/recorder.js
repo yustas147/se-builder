@@ -218,9 +218,14 @@ builder.selenium2.Recorder.prototype = {
     if (e.target.type.toLowerCase() == 'select' || e.target.type.toLowerCase() == 'select-one') {
 
       if(locator.preferredMethod == builder.locator.methods.openerp70){
-	var optLoc = locator;
+        var vals = {}
+        var model = e.target.attributes['data-bt-testing-model_name'].value;
+        var name = e.target.attributes['data-bt-testing-name'].value;
+        var value = e.target.selectedOptions[0].attributes['data-bt-testing-value'].value;
+        vals[builder.locator.methods.openerp70] = ["Select-Option\t" + model + "\t" + name + "\t" + value];
+        var optLoc = new builder.locator.Locator(builder.locator.methods.openerp70, 0, vals);
       } else {
-	var vals = {};
+        var vals = {};
         vals[builder.locator.methods.xpath] = [locator.getValueForMethod(builder.locator.methods.xpath) + "//option[" + (e.target.selectedIndex + 1) + "]"];
         var optLoc = new builder.locator.Locator(builder.locator.methods.xpath, 0, vals);
       }
