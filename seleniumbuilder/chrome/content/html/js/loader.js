@@ -209,6 +209,7 @@ builder.loader.mainScripts = [
   "builder/selenium2/io/formats/csharp_new_nunit.js",
   "builder/selenium2/io/formats/english.js",
   "builder/selenium2/io/formats/openerp-70.js",
+  "builder/selenium2/io/formats/odoo-80.js",
   "builder/locator.js",
   "builder/suite2.js",
   "builder/stepdisplay.js",

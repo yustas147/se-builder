@@ -416,6 +416,24 @@ function openerp70(values, element){
 		return builder.locator.methods.openerp70;
 	}
 
+	// Select ListView
+	if(jQuery(element).context.tagName.toLowerCase() == 'td'
+            && jQuery(element).hasClass('oe_list_field_cell')
+            && jQuery(element).parents('table.oe_list_content').length){
+
+      model = jQuery(element).attr('data-bt-testing-model_name');
+      var recordValue = '';
+
+      jQuery.each(jQuery(element).closest('tr').find('td.oe_list_field_cell'), function(index, value){
+        recordValue += "\t" + jQuery(value).attr('data-field') + '=' + jQuery(value).text()
+      });
+		//name = jQuery(element).attr('data-field');
+		//value = jQuery(element).text();
+		values[builder.locator.methods.openerp70] = ["SelectListView\t" + model + "\t" + recordValue];
+		return builder.locator.methods.openerp70;
+	}
+
+
 	/* Select (click to open the selectbox)
 	if((jQuery(element).context.tagName.toLowerCase() == 'select'
 		|| jQuery(element).context.tagName.toLowerCase() == 'select-one')
