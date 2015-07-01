@@ -272,8 +272,9 @@ function openerp70(values, element){
 
 	// Button
 	if(jQuery(element).context.tagName.toLowerCase() == 'button'){
+		model = jQuery(element).attr('data-bt-testing-model_name');
 		value = jQuery.trim(jQuery(element).attr('data-bt-testing-name'));
-		values[builder.locator.methods.openerp70] = ["Button    " + value];
+		values[builder.locator.methods.openerp70] = ["Button    " + model + "    " + value];
 		return builder.locator.methods.openerp70;
 	}
 
