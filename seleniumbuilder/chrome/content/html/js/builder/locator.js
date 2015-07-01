@@ -278,7 +278,7 @@ function openerp70(values, element){
 		return builder.locator.methods.openerp70;
 	}
 
-	
+
 	// NewOne2Many
 	if(jQuery(element).context.tagName.toLowerCase() == 'a'
 		&& jQuery(element).parents('.oe_form_field_one2many_list_row_add').length){
@@ -405,17 +405,6 @@ function openerp70(values, element){
 		values[builder.locator.methods.openerp70] = ["Text    " + model + "    " + name];
 		return builder.locator.methods.openerp70;
 	}
-	
-	// Select (selected one of the option)
-	if(jQuery(element).context.tagName.toLowerCase() == 'option'
-		&& jQuery(element).parents('.oe_form_field_selection').length){
-		model = jQuery(element).parent().attr('data-bt-testing-model_name');
-		name = jQuery(element).parent().attr('data-bt-testing-name');
-		value = jQuery.trim(jQuery(element).attr('data-bt-testing-value'));
-		values[builder.locator.methods.openerp70] = ["Select-Option\t" + model + "\t" + name + "\t" + value];
-        element.tagName = 'SELECT';
-		return builder.locator.methods.openerp70;
-	}
 
 	// Select ListView
 	if(jQuery(element).context.tagName.toLowerCase() == 'td'
@@ -433,19 +422,6 @@ function openerp70(values, element){
 		values[builder.locator.methods.openerp70] = ["SelectListView\t" + model + "\t" + recordValue];
 		return builder.locator.methods.openerp70;
 	}
-
-
-	/* Select (click to open the selectbox)
-	if((jQuery(element).context.tagName.toLowerCase() == 'select'
-		|| jQuery(element).context.tagName.toLowerCase() == 'select-one')
-		&& jQuery(element).parents('.oe_form_field_selection').length){
-		model = jQuery(element).attr('data-bt-testing-model_name');
-		name = jQuery(element).attr('data-bt-testing-name');
-		value = jQuery(element).find(":selected").attr('data-bt-testing-value');
-		values[builder.locator.methods.openerp70] = ["Select    " + model + "    " + name];		
-		return builder.locator.methods.openerp70;
-	}
-    */
 
 	values[builder.locator.methods.openerp70] = ["No match: "+jQuery(element).context.tagName+'#'+jQuery(element).parents()+'='+jQuery(element).text()];
 	return builder.locator.methods.openerp70;

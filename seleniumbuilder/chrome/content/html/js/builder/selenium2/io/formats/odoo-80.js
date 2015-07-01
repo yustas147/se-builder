@@ -10,7 +10,7 @@ builder.selenium2.io.addLangFormatter({
     "\n" +
     "*** Test Cases ***\n" +
     "Valid Login\n" +
-    "\tLogin    admin    admin    DATABASE" +
+    "\tLogin" +
     "\n" +
     "This is my test\n",
   end:
