@@ -270,6 +270,13 @@ function openerp70(values, element){
 		return builder.locator.methods.openerp70;
 	}
 
+    // Open SidebarAction
+	if(jQuery(element).context.tagName.toLowerCase() == 'button'
+          && jQuery(element).hasClass('oe_dropdown_toggle')) {
+      // Ignored this click, print empty line
+      return builder.locator.methods.openerp70;
+    }
+
 	// Button
 	if(jQuery(element).context.tagName.toLowerCase() == 'button'){
 		model = jQuery(element).attr('data-bt-testing-model_name');
@@ -417,11 +424,19 @@ function openerp70(values, element){
       jQuery.each(jQuery(element).closest('tr').find('td.oe_list_field_cell'), function(index, value){
         recordValue += "\t" + jQuery(value).attr('data-field') + '=' + jQuery(value).text()
       });
-		//name = jQuery(element).attr('data-field');
-		//value = jQuery(element).text();
-		values[builder.locator.methods.openerp70] = ["SelectListView\t" + model + "\t" + recordValue];
-		return builder.locator.methods.openerp70;
+      values[builder.locator.methods.openerp70] = ["SelectListView\t" + model + "\t" + recordValue];
+      return builder.locator.methods.openerp70;
 	}
+
+	// SidebarAction
+	if(jQuery(element).hasClass('oe_sidebar_action_a')) {
+
+      var type = jQuery(element).attr('data-bt-type');
+      var id = jQuery(element).attr('data-bt-id');
+      values[builder.locator.methods.openerp70] = ["SidebarAction\t" + type + "\t" + id];
+      return builder.locator.methods.openerp70;
+    }
+
 
 	values[builder.locator.methods.openerp70] = ["No match: "+jQuery(element).context.tagName+'#'+jQuery(element).parents()+'='+jQuery(element).text()];
 	return builder.locator.methods.openerp70;
