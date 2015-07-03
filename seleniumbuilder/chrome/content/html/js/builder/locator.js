@@ -285,7 +285,6 @@ function openerp70(values, element){
 		return builder.locator.methods.openerp70;
 	}
 
-
 	// NewOne2Many
 	if(jQuery(element).context.tagName.toLowerCase() == 'a'
 		&& jQuery(element).parents('.oe_form_field_one2many_list_row_add').length){
@@ -411,6 +410,26 @@ function openerp70(values, element){
 		value = jQuery.trim(jQuery(element).val());
 		values[builder.locator.methods.openerp70] = ["Text    " + model + "    " + name];
 		return builder.locator.methods.openerp70;
+	}
+
+	// One2ManySelectRecord (must be before ListView)
+	if(jQuery(element).context.tagName.toLowerCase() == 'td'
+            && jQuery(element).parents('div.oe_form_field_one2many').length
+            && jQuery(element).hasClass('oe_list_field_cell')
+            && jQuery(element).parents('table.oe_list_content').length){
+
+      var one2manyElement = jQuery(element).closest('div.oe_view_manager')
+
+      var model = one2manyElement.attr('data-bt-testing-model_name');
+      var field = one2manyElement.attr('data-bt-testing-name');
+      var submodel = one2manyElement.attr('data-bt-testing-submodel_name');
+
+      var recordValue = '';
+      jQuery.each(jQuery(element).closest('tr').find('td.oe_list_field_cell'), function(index, value){
+        recordValue += "\t" + jQuery(value).attr('data-field') + '=' + jQuery(value).text()
+      });
+      values[builder.locator.methods.openerp70] = ["One2ManySelectRecord\t" + model + "\t" + field + "\t" + submodel + "\t" + recordValue];
+      return builder.locator.methods.openerp70;
 	}
 
 	// Select ListView
