@@ -228,6 +228,14 @@ function inWindow(element){
 
 function openerp70(values, element){
 
+  console.log(element);
+
+	// MainMenu 9.0 EE
+  if(jQuery(element).closest('a.o_menu_toggle').length || jQuery(element).hasClass('o_menu_toggle')){
+		values[builder.locator.methods.openerp70] = ["BackToMainMenu"];
+		return builder.locator.methods.openerp70;
+	}
+
 	// MainMenu 9.0 EE
   if(jQuery(element).closest('div.o_application_switcher').length && jQuery(element).parent().has('a.o_action_app')){
 		value = jQuery.trim(jQuery(element).parent().attr('data-menu'));
@@ -506,6 +514,19 @@ function openerp70(values, element){
 		return builder.locator.methods.openerp70;
 	}
 
+	// Text 9.0 EE
+	if(jQuery(element).prop("tagName").toLowerCase() == 'textarea'
+		&& jQuery(element).hasClass('o_form_textarea')){
+		model = jQuery(element).attr('data-bt-testing-model_name');
+		name = jQuery(element).attr('data-bt-testing-name');
+		value = jQuery.trim(jQuery(element).val());
+    value = value.replace(/\n/g, "\\\\n");
+    value = value.replace(/\r?\n/g, "\\\n");
+    console.log(value);
+		values[builder.locator.methods.openerp70] = ["Text    " + model + "    " + name];
+		return builder.locator.methods.openerp70;
+	}
+
 	// Text
 	if(jQuery(element).context.tagName.toLowerCase() == 'textarea'
 		&& jQuery(element).parents('.oe_form_field_text').length){
@@ -545,7 +566,10 @@ function openerp70(values, element){
 
       // TODO: has child with attribute data-field
       jQuery.each(jQuery(element).closest('tr').find('td[data-field]'), function(index, value){
-        recordValue += "\t" + jQuery(value).attr('data-field') + '=' + jQuery(value).text()
+        console.log("#" + jQuery(value).text() + "#");
+        if(jQuery(value).text().trim()) {
+          recordValue += "\t" + jQuery(value).attr('data-field') + '=' + jQuery(value).text()
+        }
       });
       values[builder.locator.methods.openerp70] = ["SelectListView\t" + model + "\t" + recordValue];
       return builder.locator.methods.openerp70;

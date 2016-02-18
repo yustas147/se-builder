@@ -24,8 +24,13 @@ builder.selenium2.io.addLangFormatter({
       "NOT SUPPORTED\tgoForward\n",
     "clickElement":
     	"\t{locator}\n",
-    "setElementText":
-    	"\t{locator}\t{text}\n",
+    "setElementText": function(stepType, locatorType, locatorIndex) {
+      console.log(stepType, locatorType, locatorIndex);
+      var value = stepType.text;
+      value = value.replace(/\\n/g, "\\\\n");
+      value = value.replace(/\r?\n/g, "\\n");
+      return "\t" + stepType.locator.values['openerp70'][0] + "\t" + value + "\n";
+    },
     "sendKeysToElement":
     	"\t{locator}\t{text}\n",
     "setElementSelected":
