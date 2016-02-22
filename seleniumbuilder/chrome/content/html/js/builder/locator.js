@@ -310,6 +310,28 @@ function openerp70(values, element){
 		return builder.locator.methods.openerp70;
 	}
 
+ 	// Radio 9.0EE
+	if(jQuery(element).context.tagName.toLowerCase() == 'input'
+		&& element.type.toLowerCase() == 'radio'){
+    [model, isX2Many] = getModel90EE(element);
+		name = jQuery(element).attr('data-bt-testing-name');
+		value = jQuery(element).attr('value');
+    var keyword = isX2Many ? 'X2Many-Radio' : 'Radio';
+		values[builder.locator.methods.openerp70] = [keyword + "\t" + model + "\t" + name + "\t" + value];
+		return builder.locator.methods.openerp70;
+	}
+
+ 	// Radio 9.0EE
+	if(jQuery(element).context.tagName.toLowerCase() == 'input'
+		&& element.type.toLowerCase() == 'radio'){
+    [model, isX2Many] = getModel90EE(element);
+		name = jQuery(element).attr('data-bt-testing-name');
+		value = jQuery(element).attr('value');
+    var keyword = isX2Many ? 'X2Many-Radio' : 'Radio';
+		values[builder.locator.methods.openerp70] = [keyword + "\t" + model + "\t" + name + "\t" + value];
+		return builder.locator.methods.openerp70;
+	}
+
   // Open SidebarAction 9.0 EE
 	if(jQuery(element).context.tagName.toLowerCase() == 'a'
           && jQuery(element).hasClass('dropdown_toggle')) {
@@ -331,11 +353,12 @@ function openerp70(values, element){
       var id = jQuery(element).attr('data-bt-id');
       // if values, otherwise print empty line
       if(type && id) {
-        values[builder.locator.methods.openerp70] = ["SidebarAction1\t" + type + "\t" + id];
+        values[builder.locator.methods.openerp70] = ["SidebarAction\t" + type + "\t" + id];
       }
       return builder.locator.methods.openerp70;
     }
 
+  // The blue arrow on the right side of a many2one
   // Many2One-External 9.0 EE (element==button, so must before button)
 	if(jQuery(element).context.tagName.toLowerCase() == 'button'
       && jQuery(element).closest('div.o_form_field_many2one').length){
@@ -372,7 +395,17 @@ function openerp70(values, element){
 	if(jQuery(element).context.tagName.toLowerCase() == 'button'){
 		model = jQuery(element).attr('data-bt-testing-model_name');
 		value = jQuery.trim(jQuery(element).attr('data-bt-testing-name'));
-		values[builder.locator.methods.openerp70] = ["Button    " + model + "    " + value];
+		values[builder.locator.methods.openerp70] = ["Button    " + model + "\t" + value];
+		return builder.locator.methods.openerp70;
+	}
+
+	// NewOne2Many 90 EE
+	if(jQuery(element).context.tagName.toLowerCase() == 'a'
+		&& jQuery(element).parents('.o_form_field_x2many_list_row_add').length){
+		var o_x2m_control_panel = jQuery(element).closest('div.o_view_manager_content').find('div.o_x2m_control_panel');
+		model = o_x2m_control_panel.attr('data-bt-testing-model_name');
+		name = o_x2m_control_panel.attr('data-bt-testing-name');
+		values[builder.locator.methods.openerp70] = ["NewOne2Many    " + model + "\t" + name];
 		return builder.locator.methods.openerp70;
 	}
 
@@ -382,7 +415,7 @@ function openerp70(values, element){
 		var oe_view_manager = jQuery(element).closest('div.oe_view_manager');
 		model = oe_view_manager.attr('data-bt-testing-model_name');
 		name = oe_view_manager.attr('data-bt-testing-name');
-		values[builder.locator.methods.openerp70] = ["NewOne2Many    " + model + "    " + name];
+		values[builder.locator.methods.openerp70] = ["NewOne2Many    " + model + "\t" + name];
 		return builder.locator.methods.openerp70;
 	}
 
@@ -404,10 +437,11 @@ function openerp70(values, element){
 	// Many2OneSelect (writing), 90 EE
 	if(jQuery(element).context.tagName.toLowerCase() == 'input'
 		&& jQuery(element).parents('.o_form_field_many2one').length){
-		model = jQuery(element).attr('data-bt-testing-model_name');
+    [model, isX2Many] = getModel90EE(element);
 		name = jQuery(element).attr('data-bt-testing-name');
 		value = jQuery.trim(jQuery(element).text());
-		values[builder.locator.methods.openerp70] = ["Many2OneSelect    " + model + "    " + name];
+    var keyword = isX2Many ? 'X2Many-Many2OneSelect' : 'Many2OneSelect';
+		values[builder.locator.methods.openerp70] = [keyword + "\t" + model + "\t" + name];
 		return builder.locator.methods.openerp70;
 	}
 
@@ -418,16 +452,13 @@ function openerp70(values, element){
 		model = jQuery(element).attr('data-bt-testing-model_name');
 		name = jQuery(element).attr('data-bt-testing-name');
 		value = jQuery.trim(jQuery(element).text());
-		values[builder.locator.methods.openerp70] = ["Many2OneSelect    " + model + "    " + name];
+		values[builder.locator.methods.openerp70] = ["Many2OneSelect    " + model + "\t" + name];
 		return builder.locator.methods.openerp70;
 	}
 
 	// Many2OneSelect (clicking)
 	if(jQuery(element).context.tagName.toLowerCase() == 'img'
 		&& jQuery(element).parents('.oe_form_field_many2one').length){
-		model = jQuery(element).attr('data-bt-testing-model_name');
-		name = jQuery(element).attr('data-bt-testing-name');
-		value = jQuery.trim(jQuery(element).text());
 		values[builder.locator.methods.openerp70] = ["ERROR: Please check the documentation how to record Many2One fields"];
 		return builder.locator.methods.openerp70;
 	}
@@ -435,10 +466,11 @@ function openerp70(values, element){
 	// TagsNew
 	if(jQuery(element).context.tagName.toLowerCase() == 'textarea'
 		&& jQuery(element).parents('.oe_tags').length){
-		model = jQuery(element).attr('data-bt-testing-model_name');
+		[model, isX2Many] = getModel90EE(element);
 		name = jQuery(element).attr('data-bt-testing-name');
 		value = jQuery.trim(jQuery(element).text());
-		values[builder.locator.methods.openerp70] = ["TagsNew    " + model + "    " + name + "    " + value];
+    var keyword = isX2Many ? 'X2Many-TagsNew' : 'TagsNew';
+		values[builder.locator.methods.openerp70] = [keyword + "\t" + model + "\t" + name + "\t" + value];
 		return builder.locator.methods.openerp70;
 	}
 
@@ -446,10 +478,11 @@ function openerp70(values, element){
 	if(jQuery(element).context.tagName.toLowerCase() == 'a'
 		&& jQuery(element).attr('class').toLowerCase() == 'text-remove'
 		&& jQuery(element).parents('.oe_tags').length){
-		model = jQuery(element).attr('data-bt-testing-model_name');
+		[model, isX2Many] = getModel90EE(element);
 		name = jQuery(element).attr('data-bt-testing-name');
 		value = jQuery.trim(jQuery(element).siblings('span.text-label').text());
-		values[builder.locator.methods.openerp70] = ["TagsRemove    " + model + "    " + name + "    " + value];
+    var keyword = isX2Many ? 'X2Many-TagsRemove' : 'TagsRemove';
+		values[builder.locator.methods.openerp70] = [keyword + "\t" + model + "\t" + name + "\t" + value];
 		return builder.locator.methods.openerp70;
 	}
 
@@ -457,83 +490,76 @@ function openerp70(values, element){
 	if(jQuery(element).context.tagName.toLowerCase() == 'div'
 		&& jQuery(element).hasClass('text-tags')
 		&& jQuery(element).parents('.oe_tags').length){
-		model = jQuery(element).attr('data-bt-testing-model_name');
+		[model, isX2Many] = getModel90EE(element);
 		name = jQuery(element).attr('data-bt-testing-name');
 		value = jQuery.trim(jQuery(element).siblings('span.text-label').text());
-		values[builder.locator.methods.openerp70] = ["TagsRemove    " + model + "    " + name];
-		return builder.locator.methods.openerp70;
-	}
-
-	// Radio 9.0EE
-	if(jQuery(element).context.tagName.toLowerCase() == 'input'
-		&& element.type.toLowerCase() == 'radio'){
-		model = jQuery(element).attr('data-bt-testing-model_name');
-		name = jQuery(element).attr('data-bt-testing-name');
-		value = jQuery.trim(jQuery(element).val());
-		values[builder.locator.methods.openerp70] = ["Radio    " + model + "    " + name];
+    var keyword = isX2Many ? 'X2Many-TagsRemove' : 'TagsRemove';
+		values[builder.locator.methods.openerp70] = [keyword + "\t" + model + "\t" + name];
 		return builder.locator.methods.openerp70;
 	}
 
 	// Checkbox
 	if(jQuery(element).context.tagName.toLowerCase() == 'input'
 		&& element.type.toLowerCase() == 'checkbox'){
-		model = jQuery(element).attr('data-bt-testing-model_name');
+		[model, isX2Many] = getModel90EE(element);
 		name = jQuery(element).attr('data-bt-testing-name');
 		value = jQuery.trim(jQuery(element).val());
-		values[builder.locator.methods.openerp70] = ["Checkbox    " + model + "    " + name];
+    var keyword = isX2Many ? 'X2Many-Checkbox' : 'Checkbox';
+		values[builder.locator.methods.openerp70] = [keyword + "\t" + model + "\t" + name];
 		return builder.locator.methods.openerp70;
 	}
 
 	// Date
 	if(jQuery(element).context.tagName.toLowerCase() == 'input'
 		&& jQuery(element).parents('.oe_datepicker_root').length){
-		model = jQuery(element).attr('data-bt-testing-model_name');
+		[model, isX2Many] = getModel90EE(element);
 		name = jQuery(element).attr('data-bt-testing-name');
 		value = jQuery.trim(jQuery(element).val());
-		values[builder.locator.methods.openerp70] = ["Date    " + model + "    " + name];
+    var keyword = isX2Many ? 'X2Many-Date' : 'Date';
+		values[builder.locator.methods.openerp70] = [keyword + "\t" + model + "\t" + name];
 		return builder.locator.methods.openerp70;
 	}
 
 	// Char
 	if(jQuery(element).context.tagName.toLowerCase() == 'input'
 		&& jQuery(element).attr('type').toLowerCase() == 'text'){
-		model = jQuery(element).attr('data-bt-testing-model_name');
+		[model, isX2Many] = getModel90EE(element);
 		name = jQuery(element).attr('data-bt-testing-name');
 		value = jQuery.trim(jQuery(element).val());
-		values[builder.locator.methods.openerp70] = ["Char    " + model + "    " + name];
+    var keyword = isX2Many ? 'X2Many-Char' : 'Char';
+		values[builder.locator.methods.openerp70] = [keyword + "\t" + model + "\t" + name];
 		return builder.locator.methods.openerp70;
 	}
 
 	// Float
 	if(jQuery(element).context.tagName.toLowerCase() == 'input'
 		&& jQuery(element).parents('.oe_form_field_float').length){
-		model = jQuery(element).attr('data-bt-testing-model_name');
-		name = jQuery(element).attr('data-bt-testing-name');
+    [model, isX2Many] = getModel90EE(element);
+    name = jQuery(element).attr('data-bt-testing-name');
 		value = jQuery.trim(jQuery(element).val());
-		values[builder.locator.methods.openerp70] = ["Float    " + model + "    " + name];
+    var keyword = isX2Many ? 'X2Many-Float' : 'Float';
+		values[builder.locator.methods.openerp70] = [keyword + "\t" + model + "\t" + name];
 		return builder.locator.methods.openerp70;
 	}
 
 	// Text 9.0 EE
 	if(jQuery(element).prop("tagName").toLowerCase() == 'textarea'
 		&& jQuery(element).hasClass('o_form_textarea')){
-		model = jQuery(element).attr('data-bt-testing-model_name');
+
+    [model, isX2Many] = getModel90EE(element);
 		name = jQuery(element).attr('data-bt-testing-name');
-		value = jQuery.trim(jQuery(element).val());
-    value = value.replace(/\n/g, "\\\\n");
-    value = value.replace(/\r?\n/g, "\\\n");
-    console.log(value);
-		values[builder.locator.methods.openerp70] = ["Text    " + model + "    " + name];
+    var keyword = isX2Many ? 'X2Many-Text' : 'Text';
+		values[builder.locator.methods.openerp70] = [keyword + "\t" + model + "\t" + name];
 		return builder.locator.methods.openerp70;
 	}
 
 	// Text
 	if(jQuery(element).context.tagName.toLowerCase() == 'textarea'
 		&& jQuery(element).parents('.oe_form_field_text').length){
-		model = jQuery(element).attr('data-bt-testing-model_name');
+    [model, isX2Many] = getModel90EE(element);
 		name = jQuery(element).attr('data-bt-testing-name');
 		value = jQuery.trim(jQuery(element).val());
-		values[builder.locator.methods.openerp70] = ["Text    " + model + "    " + name];
+		values[builder.locator.methods.openerp70] = [keyword + "\t" + model + "\t" + name];
 		return builder.locator.methods.openerp70;
 	}
 
@@ -568,7 +594,7 @@ function openerp70(values, element){
       jQuery.each(jQuery(element).closest('tr').find('td[data-field]'), function(index, value){
         console.log("#" + jQuery(value).text() + "#");
         if(jQuery(value).text().trim()) {
-          recordValue += "\t" + jQuery(value).attr('data-field') + '=' + jQuery(value).text()
+          recordValue += "\t" + jQuery(value).attr('data-field') + '=' + jQuery(value).text().replace(/\\n/g, "\\\\n").replace(/\r?\n/g, "\\n")
         }
       });
       values[builder.locator.methods.openerp70] = ["SelectListView\t" + model + "\t" + recordValue];
@@ -713,6 +739,17 @@ builder.locator.fromElement = function(element, applyTextTransforms) {
 };
 
 // Helper functions:
+function getModel90EE(element) {
+  var o_x2m_control_panel = jQuery(element).closest('div.o_view_manager_content.o_form_field').find('div.o_x2m_control_panel');
+  console.log("o_x2m_control_panel", o_x2m_control_panel);
+  var isX2Many = false;
+  var model = jQuery(element).attr('data-bt-testing-model_name');
+  if (o_x2m_control_panel.length) {
+    isX2Many = true;
+    model = o_x2m_control_panel.attr('data-bt-testing-submodel_name');
+  }
+  return [model, isX2Many];
+}
 
 /** The DOM type enum of an Element node, as opposed to eg an attribute or text. */
 var ELEMENT_NODE_TYPE = 1;
