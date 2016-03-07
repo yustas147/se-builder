@@ -334,8 +334,10 @@ function openerp70(values, element){
 
   // Open SidebarAction 9.0 EE
 	if(jQuery(element).context.tagName.toLowerCase() == 'a'
-          && jQuery(element).hasClass('dropdown_toggle')) {
+          && jQuery(element).hasClass('dropdown-toggle')
+          && jQuery(element).parents('div.o_cp_sidebar').length) {
       // Ignored this click, print empty line
+      console.log("Open SidebarAction 9.0 EE");
       return builder.locator.methods.openerp70;
   }
 
@@ -411,7 +413,8 @@ function openerp70(values, element){
 
 	// NewOne2Many
 	if(jQuery(element).context.tagName.toLowerCase() == 'a'
-		&& jQuery(element).parents('.o_form_field_x2many_list_row_add').length){
+		&& (jQuery(element).parents('.oe_form_field_one2many_list_row_add').length ||
+        jQuery(element).parents('.oe_form_field_many2many_list_row_add').length)){
 		var oe_view_manager = jQuery(element).closest('div.oe_view_manager');
 		model = oe_view_manager.attr('data-bt-testing-model_name');
 		name = oe_view_manager.attr('data-bt-testing-name');
