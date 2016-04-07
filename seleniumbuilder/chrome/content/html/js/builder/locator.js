@@ -576,6 +576,8 @@ function openerp70(values, element){
     value = jQuery(element).attr('value');
     name = jQuery(element).closest('select').attr('data-bt-testing-name');
     model = jQuery(element).closest('select').attr('data-bt-testing-model_name');
+    // because option is normaly handled by onchange, we set it to somethin different
+    element = 'hello world'
     values[builder.locator.methods.openerp70] = ["Select-Option\t" + model + "\t" + name + "\t" + value];
     return builder.locator.methods.openerp70;
   }
