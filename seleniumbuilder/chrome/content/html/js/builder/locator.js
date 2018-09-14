@@ -388,7 +388,7 @@ function openerp70(values, element){
 		var model = jQuery(element).attr('data-bt-testing-model_name');
 		var value = jQuery.trim(jQuery(element).attr('data-bt-testing-name'));
     // When we really have no information, we take the css classes
-    if(value === ''){
+    if((value === '') || (model === undefined)){
       value = jQuery.trim(jQuery(element).attr('class'));
 		  values[builder.locator.methods.openerp70] = ["Button\tclass=" + value];
     } else {
@@ -401,8 +401,9 @@ function openerp70(values, element){
 	if(jQuery(element).context.tagName.toLowerCase() == 'button'){
 		model = jQuery(element).attr('data-bt-testing-model_name');
 		value = jQuery.trim(jQuery(element).attr('data-bt-testing-name'));
-		values[builder.locator.methods.openerp70] = ["Button    " + model + "\t" + value];
+                values[builder.locator.methods.openerp70] = ["Button    " + model + "\t" + value];
 		return builder.locator.methods.openerp70;
+		
 	}
 
 	// NewOne2Many 90 EE
@@ -564,6 +565,8 @@ function openerp70(values, element){
 	if(jQuery(element).context.tagName.toLowerCase() == 'textarea'
 		&& jQuery(element).parents('.oe_form_field_text').length){
     [model, isX2Many] = getModel90EE(element);
+//yustas
+  var keyword = isX2Many ? 'X2Many-Text' : 'Text';
 		name = jQuery(element).attr('data-bt-testing-name');
 		value = jQuery.trim(jQuery(element).val());
 		values[builder.locator.methods.openerp70] = [keyword + "\t" + model + "\t" + name];
