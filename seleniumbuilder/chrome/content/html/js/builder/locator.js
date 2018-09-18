@@ -252,7 +252,9 @@ function openerp70(values, element){
 
 	// MainMenu 8.0 click in SPAN-tag
     if(jQuery(element).parents('#oe_main_menu_placeholder').length && jQuery(element).hasClass('oe_menu_text')){
-		value = jQuery.trim(jQuery(element).parent().attr('data-menu'));
+		//value = jQuery.trim(jQuery(element).parent().attr('data-menu'));
+	    //yustas
+		value = jQuery.trim(jQuery(element).parent().attr('data-menu'))+"\t"+element.innerText;
 		values[builder.locator.methods.openerp70] = ["MainMenu    " + value];
 		return builder.locator.methods.openerp70;
 	}
@@ -344,6 +346,7 @@ function openerp70(values, element){
   // Open SidebarAction
 	if(jQuery(element).context.tagName.toLowerCase() == 'button'
           && jQuery(element).hasClass('oe_dropdown_toggle')) {
+      console.log("Open SidebarAction 8.0");
       // Ignored this click, print empty line
       return builder.locator.methods.openerp70;
   }
@@ -351,6 +354,7 @@ function openerp70(values, element){
 	// Execute SidebarAction 9.0 EE
 	if(jQuery(element).context.tagName.toLowerCase() == 'a'
           && jQuery(element).parents('div.o_cp_sidebar').length) {
+      console.log("Exec SidebarAction 8.0");
       var type = jQuery(element).attr('data-bt-type');
       var id = jQuery(element).attr('data-bt-id');
       if(!id){
@@ -360,6 +364,24 @@ function openerp70(values, element){
       // if values, otherwise print empty line
       if(type && id) {
         values[builder.locator.methods.openerp70] = ["SidebarAction\t" + type + "\t" + id];
+      }
+      return builder.locator.methods.openerp70;
+    }
+	// Execute SidebarAction 8.0
+	if(jQuery(element).context.tagName.toLowerCase() == 'a'
+          && jQuery(element).hasClass('oe_sidebar_action_a')) {
+      console.log("Exec SidebarAction 8.0");
+      var type = jQuery(element).text().trim();
+      //var type = jQuery(element).attr('data-section');
+      var id = jQuery(element).attr('data-index');
+      //if(!id){
+       // type = jQuery(element).closest('div.o_dropdown').attr('data-bt-type');
+       // id = jQuery(element).attr('data-index');
+     // }
+      // if values, otherwise print empty line
+      if(type && id) {
+        values[builder.locator.methods.openerp70] = ["SidebarAction\t" + type + "\t" + id];
+        //values[builder.locator.methods.openerp70] = ["SidebarAction\t" + type + "\t" + id];
       }
       return builder.locator.methods.openerp70;
     }
