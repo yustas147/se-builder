@@ -343,15 +343,15 @@ function openerp70(values, element){
       return builder.locator.methods.openerp70;
   }
 
-  // Open SidebarAction
 	if(jQuery(element).context.tagName.toLowerCase() == 'button'
-          && jQuery(element).hasClass('oe_dropdown_toggle')) {
-      console.log("Open SidebarAction 8.0");
-      // Ignored this click, print empty line
+          && jQuery(element).hasClass('oe_dropdown_toggle oe_dropdown_arrow')) {
+      console.log("Open SidebarActionMore button 8.0 ");
+      var type = jQuery(element).text().trim();
+      values[builder.locator.methods.openerp70] = ["SidebarActionMore\t" + type];
       return builder.locator.methods.openerp70;
   }
 
-	// Execute SidebarAction 9.0 EE
+  // Execute SidebarAction 9.0 EE
 	if(jQuery(element).context.tagName.toLowerCase() == 'a'
           && jQuery(element).parents('div.o_cp_sidebar').length) {
       console.log("Exec SidebarAction 8.0");
@@ -367,21 +367,15 @@ function openerp70(values, element){
       }
       return builder.locator.methods.openerp70;
     }
-	// Execute SidebarAction 8.0
+
+// Execute SidebarAction 8.0
+  // Click on opened list item under SidebarAction button
 	if(jQuery(element).context.tagName.toLowerCase() == 'a'
           && jQuery(element).hasClass('oe_sidebar_action_a')) {
       console.log("Exec SidebarAction 8.0");
       var type = jQuery(element).text().trim();
-      //var type = jQuery(element).attr('data-section');
-      var id = jQuery(element).attr('data-index');
-      //if(!id){
-       // type = jQuery(element).closest('div.o_dropdown').attr('data-bt-type');
-       // id = jQuery(element).attr('data-index');
-     // }
-      // if values, otherwise print empty line
-      if(type && id) {
-        values[builder.locator.methods.openerp70] = ["SidebarAction\t" + type + "\t" + id];
-        //values[builder.locator.methods.openerp70] = ["SidebarAction\t" + type + "\t" + id];
+      if(type) {
+        values[builder.locator.methods.openerp70] = ["SidebarAction\t" + type];
       }
       return builder.locator.methods.openerp70;
     }
