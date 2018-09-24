@@ -230,6 +230,16 @@ function openerp70(values, element){
 
   console.log(element);
 
+	//SubmenuToggle 8.0
+	//side sub-menu toggler
+  if(jQuery(element).hasClass('submenu-toggle')){
+		values[builder.locator.methods.openerp70] = ["SubmenuToggle"];
+		return builder.locator.methods.openerp70;
+	}
+
+
+  
+
 	// MainMenu 9.0 EE
   if(jQuery(element).closest('a.o_menu_toggle').length || jQuery(element).hasClass('o_menu_toggle')){
 		values[builder.locator.methods.openerp70] = ["BackToMainMenu"];
@@ -283,7 +293,7 @@ function openerp70(values, element){
 
 	// SubSubMenu 9.0 EE
   /*
-  if(jQuery(element).closest('a.o_menu_entry_lvl_3').length){
+  if(jQuery(element).closest('a.o_menu_entry_lvl_5').length){
 		value = jQuery.trim(jQuery(element).closest('a.o_menu_entry_lvl_3').attr('data-menu'));
 		values[builder.locator.methods.openerp70] = ["SubSubMenu    " + value];
 		return builder.locator.methods.openerp70;
